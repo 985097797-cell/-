@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Team, CONFIG_CATEGORIES } from '../types';
 import { ClipboardCheck, FileSpreadsheet } from 'lucide-react';
@@ -54,7 +53,6 @@ const TableView: React.FC<TableViewProps> = ({ teams }) => {
               {CONFIG_CATEGORIES.map(cat => (
                 <th key={cat} className="px-3 py-4 border-b border-slate-700 text-center">{cat}</th>
               ))}
-              <th className="px-4 py-4 border-b border-slate-700 min-w-[200px]">AI 战力评价</th>
             </tr>
           </thead>
           <tbody className="text-slate-300 font-bold text-sm">
@@ -74,9 +72,6 @@ const TableView: React.FC<TableViewProps> = ({ teams }) => {
                       </td>
                     );
                   })}
-                  <td className="px-4 py-3 text-xs italic text-slate-400 font-normal">
-                    {player.aiEvaluation || (player.name ? '等待评估...' : '-')}
-                  </td>
                 </tr>
               ))
             ))}
@@ -86,7 +81,7 @@ const TableView: React.FC<TableViewProps> = ({ teams }) => {
       
       <div className="bg-blue-900/10 border border-blue-900/30 p-4 rounded-xl">
         <p className="text-[10px] text-blue-400 font-bold leading-relaxed">
-          💡 操作提示：点击上方按钮后，表格将带格式复制到剪贴板。在腾讯文档（或 Excel）中选择一个起始单元格按下 Ctrl+V，系统会自动识别列宽度并填充颜色。如果需要手动录入截图，请继续保持使用本系统的“战术沙盘”模式。
+          💡 操作提示：点击上方按钮后，表格将带格式复制到剪贴板。在腾讯文档（或 Excel）中选择一个起始单元格按下 Ctrl+V，系统会自动识别列宽度并填充颜色。如果需要录入截图，请继续保持使用本系统的“战术沙盘”模式。
         </p>
       </div>
     </div>

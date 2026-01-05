@@ -1,11 +1,9 @@
-
 export interface PlayerConfig {
   id: string;
   name: string;
   level: string;
   role: string;
-  avatar?: string; // 新增：用于存储自定义头像 Base64
-  aiEvaluation?: string;
+  avatar?: string; // 用于存储自定义头像 Base64
   configs: {
     [key: string]: string[];
   };
