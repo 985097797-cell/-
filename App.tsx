@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Sword, Save, Trash2, Share2, Crown, ShieldAlert, Target, Cloud, Globe, Link, RefreshCw, Zap } from 'lucide-react';
 import TeamSection from './components/TeamSection';
@@ -21,6 +20,7 @@ const INITIAL_TEAMS: Team[] = Array.from({ length: 15 }, (_, i) => ({
     name: '',
     level: '',
     role: '',
+    positions: [], // 初始化为空
     configs: createEmptyConfigs(),
   }))
 }));
@@ -87,6 +87,7 @@ const App: React.FC = () => {
       name: '',
       level: '',
       role: '',
+      positions: [], // 清空定位
       configs: createEmptyConfigs(),
     });
   };

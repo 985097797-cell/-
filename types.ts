@@ -4,6 +4,7 @@ export interface PlayerConfig {
   level: string;
   role: string;
   avatar?: string; // 用于存储自定义头像 Base64
+  positions: string[]; // 新增：定位标签，如 ["点杀", "控制"]
   configs: {
     [key: string]: string[];
   };
@@ -67,6 +68,8 @@ export const ROLE_DATA: RoleInfo[] = [
     avatarUrl: "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=summoner&backgroundColor=ec4899" 
   }
 ];
+
+export const PLAYER_POSITIONS = ["点杀", "奶", "肉盾", "AOE", "控制", "爆发"];
 
 export const CONFIG_CATEGORIES = [
   "F1",

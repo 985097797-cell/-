@@ -50,6 +50,7 @@ const TableView: React.FC<TableViewProps> = ({ teams }) => {
               <th className="px-4 py-4 border-b border-slate-700">昵称</th>
               <th className="px-4 py-4 border-b border-slate-700">等级</th>
               <th className="px-4 py-4 border-b border-slate-700">职业</th>
+              <th className="px-4 py-4 border-b border-slate-700">定位</th>
               {CONFIG_CATEGORIES.map(cat => (
                 <th key={cat} className="px-3 py-4 border-b border-slate-700 text-center">{cat}</th>
               ))}
@@ -64,6 +65,9 @@ const TableView: React.FC<TableViewProps> = ({ teams }) => {
                   <td className="px-4 py-3 text-yellow-500/90">{player.name || '-'}</td>
                   <td className="px-4 py-3">{player.level ? `Lv.${player.level}` : '-'}</td>
                   <td className="px-4 py-3 text-blue-400">{player.role || '未定'}</td>
+                  <td className="px-4 py-3 text-xs text-slate-400 italic">
+                    {player.positions?.length > 0 ? player.positions.join(' / ') : '-'}
+                  </td>
                   {CONFIG_CATEGORIES.map(cat => {
                     const count = player.configs[cat]?.length || 0;
                     return (
