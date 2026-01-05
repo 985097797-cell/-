@@ -68,11 +68,16 @@
   }
 }
 </script>
+<script>
+    // 垫片以防止浏览器中 process.env 未定义的 Uncaught ReferenceError
+    window.process = { env: { API_KEY: "" } };
+</script>
 </head>
 <body>
     <div class="radar-bg">
         <div class="radar-line"></div>
     </div>
     <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>

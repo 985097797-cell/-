@@ -174,9 +174,12 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, onUpdate, onClear }) =>
           ))}
         </div>
 
-        <div className="mt-1 flex items-center gap-2 px-1">
-          <Sparkles className={`w-3 h-3 ${isAnalyzing ? 'text-purple-400 animate-spin' : 'text-yellow-500'}`} />
-          <span className={`text-[11px] font-black text-yellow-500/90 truncate block ${isAnalyzing ? 'animate-pulse opacity-50' : ''}`}>
+        <div className="mt-2 flex flex-col gap-1.5 px-1">
+          <div className="flex items-center gap-2">
+            <Sparkles className={`w-3 h-3 ${isAnalyzing ? 'text-purple-400 animate-spin' : 'text-yellow-500'}`} />
+            <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em]">战力评估</span>
+          </div>
+          <span className={`text-[11px] font-black text-yellow-500/90 truncate block min-h-[1.2em] ${isAnalyzing ? 'animate-pulse opacity-50' : ''}`}>
             {player.aiEvaluation ? `「 ${player.aiEvaluation} 」` : ''}
           </span>
         </div>
