@@ -1,0 +1,7 @@
+{
+  "name": "傲视千秋军团打手分配系统",
+  "description": "专为《QQ三国》傲视千秋军团设计的打手配置统计工具，支持5x5阵型排列与个人配置图上传。",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
