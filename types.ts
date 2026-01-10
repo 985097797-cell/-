@@ -10,7 +10,27 @@ export interface PlayerConfig {
 export interface Team {
   id: number;
   name: string;
+  teamNickname?: string;
   players: PlayerConfig[];
+}
+
+export interface KeyFigure {
+  id: string;
+  name: string;
+  role: string;
+  images: string[]; // 15张图片的Base64或URL
+}
+
+export interface MapIntelligence {
+  name: string;
+  lines: number[]; // 选中的线路编号，例如 [1, 2, 5]
+  notes?: string;
+}
+
+export interface HostileLegion {
+  name: string;
+  maps: MapIntelligence[];
+  keyFigures: KeyFigure[];
 }
 
 export interface RoleInfo {
@@ -67,3 +87,5 @@ export const ROLE_DATA: RoleInfo[] = [
 ];
 
 export const PLAYER_POSITIONS = ["点杀", "奶", "肉盾", "AOE", "控制", "爆发"];
+
+export const STRATEGIC_MAPS = ["东岭关", "凤鸣山", "子午谷", "逍遥津", "铜雀台", "下邳"];
