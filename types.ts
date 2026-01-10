@@ -3,11 +3,8 @@ export interface PlayerConfig {
   name: string;
   level: string;
   role: string;
-  avatar?: string; // 用于存储自定义头像 Base64
-  positions: string[]; // 新增：定位标签，如 ["点杀", "控制"]
-  configs: {
-    [key: string]: string[];
-  };
+  avatar?: string;
+  positions: string[]; // 定位标签，如 ["点杀", "控制"]
 }
 
 export interface Team {
@@ -70,15 +67,3 @@ export const ROLE_DATA: RoleInfo[] = [
 ];
 
 export const PLAYER_POSITIONS = ["点杀", "奶", "肉盾", "AOE", "控制", "爆发"];
-
-export const CONFIG_CATEGORIES = [
-  "F1",
-  "F2",
-  "奥义",
-  "元神",
-  "灵珠",
-  "子女",
-  "灵兽",
-  "天书",
-  "经络"
-];

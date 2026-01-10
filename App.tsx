@@ -1,17 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Sword, Save, Trash2, Share2, Crown, ShieldAlert, Target, Cloud, Globe, Link, RefreshCw, Zap } from 'lucide-react';
+import { Sword, Trash2, Crown, ShieldAlert, Target, Cloud, Globe, Link, RefreshCw, Zap } from 'lucide-react';
 import TeamSection from './components/TeamSection';
-import { Team, PlayerConfig, CONFIG_CATEGORIES } from './types';
+import { Team, PlayerConfig } from './types';
 
-const createEmptyConfigs = () => {
-  const configs: { [key: string]: string[] } = {};
-  CONFIG_CATEGORIES.forEach(cat => {
-    configs[cat] = [];
-  });
-  return configs;
-};
-
-// 将团队数量从 5 修改为 15
 const INITIAL_TEAMS: Team[] = Array.from({ length: 15 }, (_, i) => ({
   id: i + 1,
   name: `傲视第 ${i + 1} 纵队`,
@@ -20,8 +11,7 @@ const INITIAL_TEAMS: Team[] = Array.from({ length: 15 }, (_, i) => ({
     name: '',
     level: '',
     role: '',
-    positions: [], // 初始化为空
-    configs: createEmptyConfigs(),
+    positions: [],
   }))
 }));
 
@@ -31,7 +21,6 @@ const App: React.FC = () => {
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastSynced, setLastSynced] = useState<string | null>(null);
 
-  // 从 URL 恢复数据（实现多人在线通过链接访问）
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const sharedData = params.get('data');
@@ -48,11 +37,10 @@ const App: React.FC = () => {
       }
     }
 
-    const saved = localStorage.getItem('asqq_legion_cloud_v1');
+    const saved = localStorage.getItem('asqq_legion_cloud_v2');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // 如果本地存储的数据长度不足 15，则补齐至 15 个纵队
         const savedTeams = parsed.teams || [];
         if (savedTeams.length < 15) {
             const extendedTeams = [...savedTeams];
@@ -87,19 +75,16 @@ const App: React.FC = () => {
       name: '',
       level: '',
       role: '',
-      positions: [], // 清空定位
-      configs: createEmptyConfigs(),
+      positions: [],
     });
   };
 
-  // 模拟云端保存
   const saveToCloud = async () => {
     setIsSyncing(true);
-    // 模拟网络延迟
     await new Promise(r => setTimeout(r, 800));
     
     try {
-      localStorage.setItem('asqq_legion_cloud_v1', JSON.stringify({ teams, hostileLegions }));
+      localStorage.setItem('asqq_legion_cloud_v2', JSON.stringify({ teams, hostileLegions }));
       setLastSynced(new Date().toLocaleTimeString());
       setIsSyncing(false);
     } catch (e) {
@@ -108,7 +93,6 @@ const App: React.FC = () => {
     }
   };
 
-  // 生成多人在线协作链接
   const generateShareLink = () => {
     const data = btoa(JSON.stringify({ teams, hostileLegions }));
     const url = `${window.location.origin}${window.location.pathname}?data=${data}`;
@@ -122,7 +106,7 @@ const App: React.FC = () => {
     if (confirm('确定要清空全军战备数据吗？此操作不可撤销。')) {
       setTeams(INITIAL_TEAMS);
       setHostileLegions(['', '', '']);
-      localStorage.removeItem('asqq_legion_cloud_v1');
+      localStorage.removeItem('asqq_legion_cloud_v2');
       window.history.replaceState({}, '', window.location.pathname);
     }
   };
@@ -135,8 +119,6 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen pb-20 bg-transparent text-slate-200 selection:bg-yellow-500/30">
-      
-      {/* 协作状态浮条 */}
       <nav className="sticky top-0 z-50 glass-panel border-b border-yellow-500/20 px-6 py-3 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
@@ -275,8 +257,7 @@ const App: React.FC = () => {
           <div className="mb-16">
             <div className="inline-block px-6 py-4 rounded-xl border border-yellow-500/10 bg-slate-900/40">
               <p className="text-xs md:text-sm font-bold text-slate-400 leading-relaxed tracking-widest">
-                本系统由<span className="text-yellow-500 mx-1">盘谷</span>制作，旨在协助彬总完善傲视内部统筹协调机制，
-                为傲视团员更为直观地了解其他梯队成员的配置。
+                本系统由<span className="text-yellow-500 mx-1">盘谷</span>制作
               </p>
             </div>
           </div>

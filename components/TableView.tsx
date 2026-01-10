@@ -1,5 +1,5 @@
 import React from 'react';
-import { Team, CONFIG_CATEGORIES } from '../types';
+import { Team } from '../types';
 import { ClipboardCheck, FileSpreadsheet } from 'lucide-react';
 
 interface TableViewProps {
@@ -45,48 +45,31 @@ const TableView: React.FC<TableViewProps> = ({ teams }) => {
         <table id="aoshi-export-table" className="w-full text-left border-collapse bg-slate-900/50">
           <thead>
             <tr className="bg-slate-800/80 text-yellow-500 text-[10px] font-black uppercase tracking-[0.2em]">
-              <th className="px-4 py-4 border-b border-slate-700">纵队</th>
-              <th className="px-4 py-4 border-b border-slate-700">阵位</th>
-              <th className="px-4 py-4 border-b border-slate-700">昵称</th>
-              <th className="px-4 py-4 border-b border-slate-700">等级</th>
-              <th className="px-4 py-4 border-b border-slate-700">职业</th>
-              <th className="px-4 py-4 border-b border-slate-700">定位</th>
-              {CONFIG_CATEGORIES.map(cat => (
-                <th key={cat} className="px-3 py-4 border-b border-slate-700 text-center">{cat}</th>
-              ))}
+              <th className="px-6 py-4 border-b border-slate-700">纵队</th>
+              <th className="px-6 py-4 border-b border-slate-700">阵位</th>
+              <th className="px-6 py-4 border-b border-slate-700">昵称</th>
+              <th className="px-6 py-4 border-b border-slate-700">等级</th>
+              <th className="px-6 py-4 border-b border-slate-700">职业</th>
+              <th className="px-6 py-4 border-b border-slate-700">定位</th>
             </tr>
           </thead>
           <tbody className="text-slate-300 font-bold text-sm">
             {teams.map(team => (
               team.players.map((player, pIdx) => (
                 <tr key={player.id} className="hover:bg-slate-800/30 transition-colors border-b border-slate-800/50">
-                  <td className="px-4 py-3 text-slate-500 text-xs">{team.name}</td>
-                  <td className="px-4 py-3 text-slate-500 text-xs">{pIdx + 1}号位</td>
-                  <td className="px-4 py-3 text-yellow-500/90">{player.name || '-'}</td>
-                  <td className="px-4 py-3">{player.level ? `Lv.${player.level}` : '-'}</td>
-                  <td className="px-4 py-3 text-blue-400">{player.role || '未定'}</td>
-                  <td className="px-4 py-3 text-xs text-slate-400 italic">
-                    {player.positions?.length > 0 ? player.positions.join(' / ') : '-'}
+                  <td className="px-6 py-4 text-slate-500 text-xs">{team.name}</td>
+                  <td className="px-6 py-4 text-slate-500 text-xs">{pIdx + 1}号位</td>
+                  <td className="px-6 py-4 text-yellow-500/90">{player.name || '-'}</td>
+                  <td className="px-6 py-4">{player.level ? `Lv.${player.level}` : '-'}</td>
+                  <td className="px-6 py-4 text-blue-400">{player.role || '未定'}</td>
+                  <td className="px-6 py-4 text-xs text-slate-400 italic font-medium">
+                    {player.positions?.length > 0 ? player.positions.join(' / ') : '待分配'}
                   </td>
-                  {CONFIG_CATEGORIES.map(cat => {
-                    const count = player.configs[cat]?.length || 0;
-                    return (
-                      <td key={cat} className={`px-3 py-3 text-center text-xs ${count > 0 ? 'text-green-500' : 'text-slate-700'}`}>
-                        {count > 0 ? `√ (${count}图)` : '×'}
-                      </td>
-                    );
-                  })}
                 </tr>
               ))
             ))}
           </tbody>
         </table>
-      </div>
-      
-      <div className="bg-blue-900/10 border border-blue-900/30 p-4 rounded-xl">
-        <p className="text-[10px] text-blue-400 font-bold leading-relaxed">
-          💡 操作提示：点击上方按钮后，表格将带格式复制到剪贴板。在腾讯文档（或 Excel）中选择一个起始单元格按下 Ctrl+V，系统会自动识别列宽度并填充颜色。如果需要录入截图，请继续保持使用本系统的“战术沙盘”模式。
-        </p>
       </div>
     </div>
   );
